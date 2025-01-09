@@ -1,0 +1,12 @@
+.transparent-bar {
+  --background: transparent;
+  --ion-background-color: transparent;
+  --box-shadow: none;
+  --backdrop-filter: blur(10px);
+  --box-shadow: none;
+}
+
+.tab-button {
+  --color-selected: var(--ion-color-success);
+  --color: #ffffff;
+}
