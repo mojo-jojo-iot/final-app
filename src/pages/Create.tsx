@@ -1,29 +1,22 @@
 import {
   IonContent,
   IonPage,
-  IonTitle,
-  IonToolbar,
-  IonItem,
-  IonInput,
-  IonButton,
   IonText,
+  IonButton,
   IonGrid,
   IonRow,
   IonCol,
   IonIcon,
-  IonSearchbar,
-  IonModal
+  useIonModal
 } from '@ionic/react';
-import { Link } from 'react-router-dom';
-import { skull, home, person, mail, calendarClear, image, camera } from 'ionicons/icons';
-import React, { useState } from 'react';
-
+import { skull, image, camera } from 'ionicons/icons';
+import CameraModal from './CameraModal';
 import './Create.css';
 
-import Camera from './Camera';
-
 const Create: React.FC = () => {
-  const [showModal, setShowModal] = useState(false);
+  const [presentModal, dismissModal] = useIonModal(CameraModal, {
+    onDismiss: () => dismissModal()
+  });
 
   return (
     <IonPage>
@@ -40,7 +33,6 @@ const Create: React.FC = () => {
         </IonGrid>
 
         <IonGrid>
-
           <IonRow className="ion-justify-content-center ion-align-items-center">
             <IonCol className="ion-text-center">
               <IonButton color="success" size="large" className="big-button">
@@ -51,18 +43,20 @@ const Create: React.FC = () => {
 
           <IonRow className="ion-justify-content-center ion-align-items-center">
             <IonCol className="ion-text-center">
-              <IonButton color="success" size="large" className="big-button" onClick={() => setShowModal(true)}>
+              <IonButton 
+                color="success" 
+                size="large" 
+                className="big-button"
+                onClick={() => presentModal({
+                  initialBreakpoint: 1,
+                  breakpoints: [0, 1]
+                })}
+              >
                 <IonIcon icon={camera} />
               </IonButton>
             </IonCol>
           </IonRow>
-
         </IonGrid>
-
-        <IonModal isOpen={showModal} onDidDismiss={() => setShowModal(false)}>
-          <Camera closeModal={() => setShowModal(false)} />
-        </IonModal>
-
       </IonContent>
     </IonPage>
   );
